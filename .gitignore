@@ -6,3 +6,4 @@
 */*/.DS_Store
 target
 Cargo.toml.orig
+*.jar
