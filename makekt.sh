@@ -20,9 +20,9 @@ function create_default_file() {
     # kt_file_type="${2}"  # might use late to include script
 
     echo "
-    fun main(args: Array<String>) {
-        println("Hello, World!")
-    }
+fun main() {
+    println(\"Hello, World\")
+}
     " > "${filename}"
 }
 
@@ -60,6 +60,12 @@ function remove_ext() {
    echo "${remove_ext}"
 }
 
+function delete_file() {
+    filename="${1}";
+
+    rm -f "${filename}"
+}
+
 # check that the cli option is 2 namely;
 # option and filename
 if [[ "$#" -ne 2 ]]; then
@@ -72,11 +78,24 @@ while getopts "${opstring}" opt; do
         c)
         # compile and run kotlin standalone file
         filename="${OPTARG^}"
+        file_name="${filename%.*}"
+        # kotlin command to compile and run
+        kotlinc-jvm "${filename}" -d "${file_name}.jar"
+        kotlin -classpath "${file_name}.jar" "${file_name}Kt"
         ;;
         d)
         # delete specified file
         filename="${OPTARG^}"
 
+        # delete file messages
+        messages=(
+            "${filename} exist. Do you want to Delete it? "
+            "${filename} Deleted."
+            "${filename} not deleted."
+            "You can only use y for YES and n for NO."
+        )
+
+        action_on_file delete_file "${filename}" "${messages[@]}"
         ;;
         g)
         # generate a generic file
