@@ -15,6 +15,15 @@ fun printNumberSign(num: Int) {
             .print()
 }
 
+fun printNumberSignWhen(num: Int) =
+        println(
+                when {
+                    num < 0 -> "negative"
+                    num > 0 -> "positive"
+                    else -> "zero"
+                }
+        )
+
 fun main() {
     val superpower = false
     val result =
@@ -31,4 +40,5 @@ fun main() {
     printNumberSign(0)
     print(",")
     printNumberSign(2)
+    printNumberSignWhen(-3)
 }
