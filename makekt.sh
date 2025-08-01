@@ -21,7 +21,7 @@ function create_default_file() {
 
     echo "
 fun main() {
-    println(\"Hello, World\")
+    println(\"Hello, World!\")
 }
     " > "${filename}"
 }
