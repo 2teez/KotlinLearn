@@ -26,6 +26,32 @@ function create_default_file() {
     " > "${filename}"
 }
 
+# generic function to do some action on file
+function action_on_file() {
+    func="${1}"; shift
+    filename="${1}"; shift
+    messages=("$@")
+    if [[ -e "${filename}" ]]; then
+        while read -p "${messages[0]}" ans; do
+            case "${ans,,}" in
+                y)
+                "${func}" "${filename}" # create the file
+                echo "${messages[1]}"
+                exit 0
+                ;;
+                n)
+                   echo "${messages[2]}"
+                   break
+                ;;
+                *)
+                echo "${messages[3]}"
+                ;;
+            esac
+        done
+    fi
+}
+
+
 # file extension remover
 function remove_ext() {
    filename="${1}"
@@ -48,7 +74,9 @@ while getopts "${opstring}" opt; do
         filename="${OPTARG^}"
         ;;
         d)
+        # delete specified file
         filename="${OPTARG^}"
+
         ;;
         g)
         # generate a generic file
@@ -60,27 +88,14 @@ while getopts "${opstring}" opt; do
         # check if file doesn't have an extension, append either kt #or kts
         [[ "${file_extension}" == "${file_name}" ]] && filename="${filename}.kt"
 
-
         # check if the file exist and if you want to overwrite it
-        if [[ -e "${filename}" ]]; then
-            #echo "${filename} exist. Do you want to overwrite it?"
-            while read -p "${filename} exist. Do you want to overwrite it? " ans; do
-                case "${ans,,}" in
-                    y)
-                    create_default_file "${filename}" # create the file
-                    echo "${filename} Overwritten."
-                    exit 0
-                    ;;
-                    n)
-                       echo "${filename} not overwritten."
-                       break
-                    ;;
-                    *)
-                    echo "You can only use y for YES and n for NO."
-                    ;;
-                esac
-            done
-        fi
+        messages=(
+            "${filename} exist. Do you want to overwrite it? "
+            "${filename} Overwritten."
+            "${filename} not overwritten."
+            "You can only use y for YES and n for NO."
+        )
+        action_on_file create_default_file "${filename}" "${messages[@]}"
         # create the file
         create_default_file "${filename}"
         ;;
