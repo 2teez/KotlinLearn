@@ -25,7 +25,7 @@ fun main() {
     println(
             "$myAge ${
         when (myAge){
-            in 12..19 -> "is a teenager"
+            in 13..19 -> "is a teenager"
             else -> "is not a teenger"
         }
         }"
