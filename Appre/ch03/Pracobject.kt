@@ -21,6 +21,17 @@ class MathUtils {
     }
 }
 
+class Counter private constructor() {
+    companion object {
+        var count = 0
+            private set
+        fun new(): Counter {
+            count++
+            return Counter()
+        }
+    }
+}
+
 fun main() {
     Logger.log("Hello, World!")
     Logger.log("starting application...")
@@ -31,4 +42,8 @@ fun main() {
     //
     println(MathUtils().square(3))
     println(MathUtils.sum(2, 9))
+    //
+    repeat(5) { Counter.new() }
+    // Counter.count = 10 // private set prevented this
+    println(Counter.count) // > 5
 }
