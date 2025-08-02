@@ -19,7 +19,11 @@ function create_default_file() {
     filename="${1^}"
     # kt_file_type="${2}"  # might use late to include script
 
+    # modify and use package name
+    package_name="${filename%.*}"
+    package_name="com.prac.${package_name,,}"
     echo "
+package ${package_name}
 fun main() {
     println(\"Hello, World!\")
 }
@@ -79,9 +83,14 @@ while getopts "${opstring}" opt; do
         # compile and run kotlin standalone file
         filename="${OPTARG^}"
         file_name="${filename%.*}"
+
+        # modify and use package name
+        #package_name="${filename%.*}"
+        package_name="com.prac.${file_name,,}"
+
         # kotlin command to compile and run
         kotlinc-jvm "${filename}" -d "${file_name}.jar"
-        kotlin -classpath "${file_name}.jar" "${file_name}Kt"
+        kotlin -classpath "${file_name}.jar" "${package_name}.${file_name}Kt"
         ;;
         d)
         # delete specified file
