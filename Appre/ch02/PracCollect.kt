@@ -17,6 +17,8 @@ fun main() {
     println(remove(43, ages))
     println(reverse(ages.toTypedArray()).joinToString())
     println(randomized(ages.toTypedArray()).joinToString())
+    println(minMax(ages.toTypedArray()))
+    println("SHOW EMPTY: ${minMax(arrayOf<Int>())}")
 }
 
 fun removeOne(item: Int, list: List<Int>): List<Int> {
@@ -54,4 +56,20 @@ fun randomized(list: Array<Int>): Array<Int> {
     val nlist = mutableListOf<Int>()
     repeat(list.size) { nlist.add(list[rand(0, list.size - 1)]) }
     return nlist.toTypedArray()
+}
+
+fun minMax(list: Array<Int>): Pair<Int, Int>? {
+    if (list.isEmpty()) return null
+    var minValue = Int.MAX_VALUE
+    var maxValue = Int.MIN_VALUE
+    for (value in list) {
+        if (value < minValue) {
+            minValue = value
+        }
+        if (value > maxValue) {
+            maxValue = value
+        }
+    }
+    val result: Pair<Int, Int>? = Pair(minValue, maxValue)
+    return result
 }
