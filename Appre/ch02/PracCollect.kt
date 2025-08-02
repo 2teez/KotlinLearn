@@ -70,6 +70,6 @@ fun minMax(list: Array<Int>): Pair<Int, Int>? {
             maxValue = value
         }
     }
-    val result: Pair<Int, Int>? = Pair(minValue, maxValue)
-    return result
+    // val result: Pair<Int, Int>? = Pair(minValue, maxValue)
+    return minValue to maxValue // result
 }
