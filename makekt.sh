@@ -45,7 +45,7 @@ function action_on_file() {
                 ;;
                 n)
                    echo "${messages[2]}"
-                   break
+                   exit 1
                 ;;
                 *)
                 echo "${messages[3]}"
