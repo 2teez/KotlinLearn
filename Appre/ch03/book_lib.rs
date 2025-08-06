@@ -175,7 +175,7 @@ fn main() {
     lib.borrow_book(Book::new("bible", "gideon"), &mut member);
     lib.borrow_book(Book::new("new general mathematics", "cn port"), &mut member);
     //
-    //lib.list_books();
+    lib.list_books();
     lib.return_book(Book::new("new general mathematics", "cn port"), &mut member);
     //
     lib.list_books();
