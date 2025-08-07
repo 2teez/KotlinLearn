@@ -165,7 +165,7 @@ fn main() {
     // add members
     lib.add_member(Member::new_member_name("John Doe"));
     lib.add_member(Member::new_member_name("dorcas folorunso"));
-    //lib.members.push(Member::new_member("Albert", "Esentin"));
+    lib.add_member(Member::new_member("Albert", "Esentin"));
     //println!("{:?}", lib);
     //
     let mut member = lib
