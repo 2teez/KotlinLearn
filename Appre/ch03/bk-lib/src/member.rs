@@ -16,6 +16,15 @@ pub struct Person {
     birth_day: BirthDate,
 }
 
+impl Person {
+    pub fn is_default(&self) -> bool {
+        if self.first_name == "" && self.last_name == "" {
+            return true;
+        }
+        false
+    }
+}
+
 #[derive(Clone, Default, Debug, PartialEq)]
 pub struct Member {
     pub person: Person,
