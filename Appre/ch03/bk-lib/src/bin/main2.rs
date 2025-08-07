@@ -24,7 +24,7 @@ fn main() {
         Member::new()
     };
     //
-    if member.person.first_name == "" && member.person.last_name == "" {
+    if member.person.is_default() {
         println!("{:?} is not a member YET!", member);
         std::process::exit(1)
     }
