@@ -21,17 +21,17 @@ impl Library {
         self.members.push(member)
     }
 
-    pub fn find_member(&self, name: &str) -> Option<Member> {
+    pub fn find_member(&self, name: &str) -> Option<&Member> {
         let pick = Member::new_member_name(name);
         for member in &self.members {
             if pick == *member {
-                return Some(pick);
+                return Some(member);
             }
         }
         None
     }
 
-    pub fn add_a_book(&mut self, title: &str, author: &str) {
+    pub fn add_book(&mut self, title: &str, author: &str) {
         self.books.push(Book {
             title: title.to_string(),
             author: author.to_string(),
