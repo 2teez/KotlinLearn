@@ -11,7 +11,7 @@ fn main() {
     let number_of_books = cin("Enter number of books to add: ");
     for _ in 0..=number_of_books {
         let book = get_a_book();
-        lib.add_a_book(&book.title, &book.author);
+        lib.add_book(&book.title, &book.author);
     }
 
     let mut ae = Member::new_member("Albert", "Estein");
