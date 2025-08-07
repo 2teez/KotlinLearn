@@ -9,3 +9,7 @@ cin = "0.2.0"
 [[bin]]
 name = "main"
 path = "src/bin/main.rs"
+
+[[bin]]
+name = "main2"
+path = "src/bin/main2.rs"
