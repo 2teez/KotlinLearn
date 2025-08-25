@@ -12,6 +12,7 @@ function help() {
     printf "c   - compiles and run a generic kotlin file\n"
     printf "g   - generate a generic kotlin standalone file\n"
     printf "d   - delete a standalone kotlin file\n"
+    printf "q   - compile, run and then delete the standalone kotline file.\n"
 }
 
 # file creation
@@ -76,7 +77,7 @@ if [[ "$#" -ne 2 ]]; then
     help
 fi
 
-opstring="c:d:g:h"
+opstring="c:d:g:q:h"
 while getopts "${opstring}" opt; do
     case "${opt}" in
         c)
@@ -126,6 +127,14 @@ while getopts "${opstring}" opt; do
         action_on_file create_default_file "${filename}" "${messages[@]}"
         # create the file
         create_default_file "${filename}"
+        ;;
+        q)
+            filename="${OPTARG}"
+            file_without_sion="${filename%.*}"
+            kotlinc "${filename}" &&
+            kotlin "com/prac/${file_without_sion,,}/${file_without_sion}Kt.class" &&
+            rm -rf "com/prac/${file_without_sion,,}"
+            rm -rf META-INF/
         ;;
         h)
           help # help function
