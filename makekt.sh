@@ -132,9 +132,11 @@ while getopts "${opstring}" opt; do
             filename="${OPTARG}"
             file_without_sion="${filename%.*}"
             kotlinc "${filename}" &&
-            kotlin "com/prac/${file_without_sion,,}/${file_without_sion}Kt.class" &&
-            rm -rf "com/prac/${file_without_sion,,}"
-            rm -rf META-INF/
+            kotlin "com/prac/${file_without_sion,,}/${file_without_sion}Kt.class"
+
+            # codes below to be review later
+            #rm -rf "com/prac/${file_without_sion,,}"
+            #rm -rf META-INF/
         ;;
         h)
           help # help function
