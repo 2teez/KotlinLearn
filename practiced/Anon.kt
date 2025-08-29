@@ -7,14 +7,22 @@ fun main() {
     val anSayHello = { println("Howdy World!") } // lambda expression
     anSayHello.invoke()
     //
-    var fc = kounter()
-    var sc = kounter()
+    val fc = kounter()
+    val sc = kounter()
     println(fc())
     println(fc())
     println(fc())
     pp("second counter -> ") { println(sc()) }
     pp("second counter -> ") { println(sc()) }
     pp("first counter -> ") { println(fc()) }
+    //
+    val pl =
+            fun(msg: String, fn: () -> Unit) {
+                print(msg)
+                fn()
+            }
+
+    pl("Anonymous Function: ") { println(sc()) }
 }
 
 fun kounter(count: Int = 0): () -> Int {
@@ -22,7 +30,7 @@ fun kounter(count: Int = 0): () -> Int {
     return { lCount++ }
 }
 
-fun pp(msg: String = "", fn: () -> Unit) {
+inline fun pp(msg: String = "", fn: () -> Unit) {
     print(msg)
     fn()
 }
