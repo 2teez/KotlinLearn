@@ -75,6 +75,7 @@ function delete_file() {
 # option and filename
 if [[ "$#" -ne 2 ]]; then
     help
+    exit 1
 fi
 
 opstring="c:d:g:q:h"
