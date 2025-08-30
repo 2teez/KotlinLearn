@@ -9,12 +9,12 @@ fun main() {
     //
     val fc = kounter()
     val sc = kounter()
-    println(fc())
-    println(fc())
-    println(fc())
-    pp("second counter -> ") { println(sc()) }
-    pp("second counter -> ") { println(sc()) }
-    pp("first counter -> ") { println(fc()) }
+    println(fc)
+    println(fc)
+    println(fc)
+    pp("second counter -> ") { println(sc) }
+    pp("second counter -> ") { println(sc) }
+    pp("first counter -> ") { println(fc) }
     //
     val pl =
             fun(msg: String, fn: () -> Unit) {
@@ -22,7 +22,13 @@ fun main() {
                 fn()
             }
 
-    pl("Anonymous Function: ") { println(sc()) }
+    pl("Anonymous Function: ") { println(sc) }
+
+    val lambda: (String, () -> Unit) -> Unit = { msg, f ->
+        print(msg)
+        f()
+    }
+    lambda("Another counter -> ") { println(fc) }
 }
 
 fun kounter(count: Int = 0): () -> Int {
